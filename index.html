@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Monsieur Thé - Boutique de thés d'exception. Découvrez un univers futuriste de saveurs et d'élégance.">
+  <meta name="keywords" content="thé premium, boutique thé, thé vert, thé noir, thé blanc, Monsieur Thé, thé artisanal">
+  <meta name="author" content="Monsieur Thé">
+  <title>Monsieur Thé - L'Art du Thé</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div id="loader-animation"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center h-auto md:h-32 py-4 md:py-0">
+        <div class="flex justify-center">
+          <img src="image/Thé.png" alt="Monsieur Thé Logo">
+          <!-- Remplacer par votre logo : Logo futuriste avec texte "Monsieur Thé" en Montserrat, feuille saphir et or pâle, fond transparent. -->
+        </div>
+        <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-12 mt-4 md:mt-0">
+          <a href="#boutique" class="nav-link text-anthracite hover:text-sapphire text-lg font-medium">Boutique</a>
+          <a href="#a-propos" class="nav-link text-anthracite hover:text-sapphire text-lg font-medium">À propos</a>
+          <a href="#contact" class="nav-link text-anthracite hover:text-sapphire text-lg font-medium">Contact</a>
+          <a href="#emplacement" class="nav-link text-anthracite hover:text-sapphire text-lg font-medium">Emplacement</a>
+          <div class="relative">
+            <button id="cart-toggle" class="text-anthracite hover:text-sapphire">
+              <i class="fas fa-shopping-cart text-2xl"></i>
+              <span id="cart-count" class="absolute -top-3 -right-3 bg-sapphire text-ivory text-xs rounded-full h-6 w-6 flex items-center justify-center">0</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Cart Modal -->
+  <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex items-center justify-center">
+    <div class="bg-ivory text-anthracite rounded-3xl w-full max-w-lg p-10">
+      <div class="flex justify-between items-center">
+        <h2 class="text-4xl font-montserrat font-bold">Votre Panier</h2>
+        <button id="close-cart" class="text-anthracite hover:text-sapphire"><i class="fas fa-times text-2xl"></i></button>
+      </div>
+      <div id="cart-items" class="mt-8 grid grid-cols-1 gap-6"></div>
+      <div class="mt-10 flex justify-between">
+        <p class="font-semibold text-xl">Total :</p>
+        <p id="cart-total" class="font-bold text-xl">0,00 €</p>
+      </div>
+      <button class="mt-8 w-full bg-sapphire text-ivory py-3 rounded-full hover:bg-blue-800 text-lg font-semibold">Passer à la caisse</button>
+    </div>
+  </div>
+
+  <!-- Product Modal -->
+  <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden z-50 flex items-center justify-center">
+    <div class="bg-ivory text-anthracite rounded-3xl w-full max-w-3xl p-10">
+      <div class="flex justify-between items-center">
+        <h2 id="modal-title" class="text-4xl font-montserrat font-bold"></h2>
+        <button id="close-product-modal" class="text-anthracite hover:text-sapphire"><i class="fas fa-times text-2xl"></i></button>
+      </div>
+      <div class="mt-8 flex flex-col md:flex-row">
+        <div id="modal-3d-canvas" class="w-full md:w-1/2 h-80 rounded-2xl"></div>
+        <div class="md:pl-8 mt-6 md:mt-0">
+          <p id="modal-description" class="text-gray-700"></p>
+          <p id="modal-price" class="mt-6 font-bold text-2xl"></p>
+          <button id="modal-add-to-cart" class="mt-8 bg-sapphire text-ivory py-3 px-8 rounded-full hover:bg-blue-800 text-lg font-semibold" data-name="" data-price="" data-image=""><i class="fas fa-cart-plus mr-2"></i> COMMANDER</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative py-48">
+    <video autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0">
+      <source src="/hero-video-placeholder.mp4" type="video/mp4">
+      <!-- Remplacer par votre vidéo : Feuilles de thé tombant doucement, teintes saphir et dorées, slow-motion. -->
+    </video>
+    <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 z-1"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <h1 class="text-7xl md:text-9xl font-montserrat font-bold text-ivory">Monsieur Thé</h1>
+      <p class="mt-6 text-2xl md:text-3xl text-gray-300 typewriter">Un voyage dans l'art du thé.</p>
+      <a href="#boutique" class="mt-10 inline-block bg-sapphire text-ivory px-12 py-5 rounded-full hover:bg-blue-800 text-xl font-semibold">Explorer la Boutique</a>
+    </div>
+  </section>
+
+  <!-- Boutique Section -->
+  <section id="boutique" class="py-24 bg-ivory">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-5xl font-montserrat font-bold text-center text-anthracite">Notre Collection</h2>
+      <p class="mt-4 text-center text-gray-700 text-lg">Des thés d’exception pour des moments uniques.</p>
+      <div class="mt-10 flex justify-between items-center">
+        <div class="flex space-x-6">
+          <button class="filter-btn bg-sapphire text-ivory px-6 py-3 rounded-full text-lg font-semibold" data-filter="all">Tous</button>
+          <button class="filter-btn bg-gray-200 text-anthracite px-6 py-3 rounded-full text-lg font-semibold" data-filter="vert">Thé Vert</button>
+          <button class="filter-btn bg-gray-200 text-anthracite px-6 py-3 rounded-full text-lg font-semibold" data-filter="noir">Thé Noir</button>
+          <button class="filter-btn bg-gray-200 text-anthracite px-6 py-3 rounded-full text-lg font-semibold" data-filter="blanc">Thé Blanc</button>
+        </div>
+        <input type="text" id="search" placeholder="Rechercher un thé..." class="border-none bg-gray-100 text-anthracite rounded-full px-6 py-3 focus:ring-sapphire focus:border-sapphire text-lg">
+      </div>
+      <div id="products" class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div class="product bg-white rounded-3xl shadow-2xl" data-category="vert">
+          <div class="product-image relative">
+            <img src="image/fruit-tea.jpg" alt="Thé Vert Matcha">
+            <!-- Remplacer par votre image : Thé vert Matcha en bol céramique, poudre vibrante, fond saphir. -->
+            <button class="add-to-cart py-3 px-8 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" data-name="Thé Vert Matcha" data-price="18.00" data-description="Énergie pure, saveur intense." data-image="/tea-1-placeholder.jpg"><i class="fas fa-cart-plus mr-2"></i> COMMANDER</button>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-montserrat font-bold">Thé Vert Matcha</h3>
+            <p class="mt-2 font-bold text-xl">18,00 €</p>
+            <div class="mt-6 flex justify-between items-center">
+              <button class="add-to-favorites text-gray-700 hover:text-red-600 text-xl"><i class="fas fa-heart"></i></button>
+              <button class="view-product text-gray-700 hover:text-sapphire text-xl" data-name="Thé Vert Matcha" data-price="18.00" data-description="Énergie pure, saveur intense." data-image="/tea-1-placeholder.jpg"><i class="fas fa-eye"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="product bg-white rounded-3xl shadow-2xl" data-category="noir">
+          <div class="product-image relative">
+            <img src="image/matcha.jpg" alt="Thé Noir Darjeeling">
+            <!-- Remplacer par votre image : Thé noir Darjeeling en tasse noire, fond doré pâle. -->
+            <button class="add-to-cart py-3 px-8 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" data-name="Thé Noir Darjeeling" data-price="14.00" data-description="Raffiné, notes florales." data-image="/tea-2-placeholder.jpg"><i class="fas fa-cart-plus mr-2"></i> COMMANDER</button>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-montserrat font-bold">Thé Noir Darjeeling</h3>
+            <p class="mt-2 font-bold text-xl">14,00 €</p>
+            <div class="mt-6 flex justify-between items-center">
+              <button class="add-to-favorites text-gray-700 hover:text-red-600 text-xl"><i class="fas fa-heart"></i></button>
+              <button class="view-product text-gray-700 hover:text-sapphire text-xl" data-name="Thé Noir Darjeeling" data-price="14.00" data-description="Raffiné, notes florales." data-image="/tea-2-placeholder.jpg"><i class="fas fa-eye"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="product bg-white rounded-3xl shadow-2xl" data-category="blanc">
+          <div class="product-image relative">
+            <img src="image/yogurt.jpg" alt="Thé Blanc Jasmin">
+            <!-- Remplacer par votre image : Thé blanc Jasmin avec fleurs, fond ivoire et saphir. -->
+            <button class="add-to-cart py-3 px-8 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" data-name="Thé Blanc Jasmin" data-price="22.00" data-description="Délicat, parfum envoûtant." data-image="/tea-3-placeholder.jpg"><i class="fas fa-cart-plus mr-2"></i> COMMANDER</button>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-montserrat font-bold">Thé Blanc Jasmin</h3>
+            <p class="mt-2 font-bold text-xl">22,00 €</p>
+            <div class="mt-6 flex justify-between items-center">
+              <button class="add-to-favorites text-gray-700 hover:text-red-600 text-xl"><i class="fas fa-heart"></i></button>
+              <button class="view-product text-gray-700 hover:text-sapphire text-xl" data-name="Thé Blanc Jasmin" data-price="22.00" data-description="Délicat, parfum envoûtant." data-image="/tea-3-placeholder.jpg"><i class="fas fa-eye"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- À propos Section -->
+  <section id="a-propos" class="py-24 bg-ivory">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-5xl font-montserrat font-bold text-center text-anthracite">L’Essence de Monsieur Thé</h2>
+      <p class="mt-4 text-center text-gray-700 text-lg">Une passion pour l’excellence.</p>
+      <div class="mt-12 flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2">
+          <img src="image/image.jpg" alt="À propos Image" class="w-full h-96 rounded-3xl shadow-2xl object-cover">
+          <!-- Remplacer par votre image : Plantation de thé sous lumière saphir, ambiance futuriste. -->
+        </div>
+        <div class="md:w-1/2 md:pl-12 mt-8 md:mt-0">
+          <p class="text-gray-700">Monsieur Thé redéfinit l’art du thé depuis 2020. Nos créations, issues des meilleures origines, fusionnent tradition et innovation pour offrir une expérience sensorielle unique.</p>
+          <a href="#boutique" class="mt-8 inline-block bg-sapphire text-ivory px-8 py-3 rounded-full hover:bg-blue-800 text-lg font-semibold">Découvrir Nos Thés</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-24 bg-ivory">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-5xl font-montserrat font-bold text-center text-anthracite">Nous Contacter</h2>
+      <p class="mt-4 text-center text-gray-700 text-lg">Partagez votre passion avec nous.</p>
+      <div class="mt-12 max-w-lg mx-auto">
+        <div class="space-y-8">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Nom</label>
+            <input type="text" id="name" class="mt-2 block w-full border-none bg-gray-100 text-anthracite rounded-full shadow-lg focus:ring-sapphire focus:border-sapphire" required>
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" id="email" class="mt-2 block w-full border-none bg-gray-100 text-anthracite rounded-full shadow-lg focus:ring-sapphire focus:border-sapphire" required>
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+            <textarea id="message" rows="5" class="mt-2 block w-full border-none bg-gray-100 text-anthracite rounded-2xl shadow-lg focus:ring-sapphire focus:border-sapphire" required></textarea>
+          </div>
+          <button id="contact-submit" class="w-full bg-sapphire text-ivory py-3 rounded-full hover:bg-blue-800 text-lg font-semibold"><i class="fas fa-paper-plane mr-2"></i> Envoyer</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emplacement Section -->
+  <section id="emplacement" class="py-24 bg-ivory">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <h2 class="text-5xl font-montserrat font-bold text-center text-anthracite">Notre Boutique</h2>
+      <p class="mt-4 text-center text-gray-700 text-lg">Visitez-nous à lome.</p>
+      <div class="mt-12 flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 relative">
+          <svg class="absolute inset-0 w-full h-full z-0" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path id="map-frame" d="M10,10 H90 V90 H10 Z" fill="none" stroke="#1b4965" stroke-width="2"/>
+          </svg>
+          <iframe class="w-full h-96 rounded-3xl shadow-2xl z-10 map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937606!2d2.352221315674689!3d48.85661407928772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee6041f46!2sMus%C3%A9e%20du%20Louvre!5e0!3m2!1sfr!2sfr!4v1634567891234!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="md:w-1/2 md:pl-12 mt-8 md:mt-0 info-frame">
+          <p class="text-gray-700 info-item"><strong>Adresse :</strong> 123 Rue du Thé, lome, togo</p>
+          <p class="mt-2 text-gray-700 info-item"><strong>Téléphone :</strong> +228 96 45 87 23</p>
+          <p class="mt-2 text-gray-700 info-item"><strong>Email :</strong> </p>monsieurthe@gmail.com
+          <div class="mt-2 hours-frame">
+            <h3 class="text-xl font-montserrat font-bold text-anthracite">Heures d'ouverture</h3>
+            <p class="text-gray-700 info-item">Lundi - Samedi : 10h00 - 19h00</p>
+            <p class="text-gray-700 info-item">Dimanche : Fermé</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-anthracite text-ivory py-16 relative">
+    <video autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-30">
+      <source src="/footer-video-placeholder.mp4" type="video/mp4">
+      <!-- Remplacer par votre vidéo : Plantation de thé en slow-motion, teintes saphir et dorées. -->
+    </video>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <img class="h-28 w-auto mx-auto" src="image/Thé.png" alt="Monsieur Thé Logo">
+      <h3 class="text-4xl font-montserrat font-bold mt-6 text-pulse">Monsieur Thé - L’Art du Futur</h3>
+      <nav class="mt-8 flex justify-center space-x-8">
+        <a href="#boutique" class="footer-link text-ivory hover:text-sapphire text-lg font-medium">Boutique</a>
+        <a href="#a-propos" class="footer-link text-ivory hover:text-sapphire text-lg font-medium">À propos</a>
+        <a href="#contact" class="footer-link text-ivory hover:text-sapphire text-lg font-medium">Contact</a>
+        <a href="#emplacement" class="footer-link text-ivory hover:text-sapphire text-lg font-medium">Emplacement</a>
+      </nav>
+      <div class="mt-8 flex justify-center space-x-8">
+        <a href="#" class="social-link text-ivory hover:text-sapphire" data-lottie="/social-particles.json"><i class="fab fa-instagram fa-2x"></i></a>
+        <a href="#" class="social-link text-ivory hover:text-sapphire" data-lottie="/social-particles.json"><i class="fab fa-facebook fa-2x"></i></a>
+        <a href="#" class="social-link text-ivory hover:text-sapphire" data-lottie="/social-particles.json"><i class="fab fa-twitter fa-2x"></i></a>
+      </div>
+      <p class="mt-8 text-gray-400">© 2025 Monsieur Thé. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Loader
+    window.addEventListener('load', () => {
+      lottie.loadAnimation({
+        container: document.getElementById('loader-animation'),
+        path: '/loader-animation.json',
+        renderer: 'svg',
+        loop: true,
+        autoplay: true
+      });
+      gsap.to('#loader', { opacity: 0, duration: 0.8, delay: 2.5, onComplete: () => {
+        document.getElementById('loader').style.display = 'none';
+      }});
+    });
+
+    // Three.js Modal Animation
+    const modalCanvas = document.getElementById('modal-3d-canvas');
+    const modalScene = new THREE.Scene();
+    const modalCamera = new THREE.PerspectiveCamera(75, modalCanvas.clientWidth / modalCanvas.clientHeight, 0.1, 1000);
+    const modalRenderer = new THREE.WebGLRenderer({ alpha: true });
+    modalRenderer.setSize(modalCanvas.clientWidth, modalCanvas.clientHeight);
+    modalCanvas.appendChild(modalRenderer.domElement);
+    const modalGeometry = new THREE.BoxGeometry(1, 1, 1);
+    const modalMaterial = new THREE.MeshBasicMaterial({ color: 0x1b4965 });
+    const modalCube = new THREE.Mesh(modalGeometry, modalMaterial);
+    modalScene.add(modalCube);
+    modalCamera.position.z = 5;
+    function animateModal() {
+      requestAnimationFrame(animateModal);
+      modalCube.rotation.x += 0.02;
+      modalCube.rotation.y += 0.02;
+      modalRenderer.render(modalScene, modalCamera);
+    }
+    animateModal();
+
+    // GSAP Animations
+    gsap.from('#hero h1', { opacity: 0, y: 200, duration: 1.5, ease: 'power4.out' });
+    gsap.from('#hero p', { opacity: 0, y: 200, duration: 1.5, delay: 0.3, ease: 'power4.out' });
+    gsap.from('#hero a', { opacity: 0, scale: 0.5, rotation: -30, duration: 1.2, delay: 0.6, ease: 'back.out(1.7)' });
+
+    gsap.from('.product', {
+      scrollTrigger: { trigger: '#boutique', start: 'top 80%' },
+      opacity: 0,
+      y: 150,
+      stagger: 0.4,
+      duration: 1.5,
+      ease: 'power4.out'
+    });
+
+    // Emplacement Animation
+    gsap.from('#emplacement h2', {
+      scrollTrigger: { trigger: '#emplacement', start: 'top 80%' },
+      opacity: 0,
+      y: 100,
+      duration: 1.2,
+      ease: 'power4.out'
+    });
+
+    gsap.from('#emplacement p', {
+      scrollTrigger: { trigger: '#emplacement', start: 'top 80%' },
+      opacity: 0,
+      y: 100,
+      duration: 1.2,
+      delay: 0.3,
+      ease: 'power4.out'
+    });
+
+    gsap.from('.map-frame', {
+      scrollTrigger: { trigger: '#emplacement', start: 'top 80%' },
+      opacity: 0,
+      scale: 0.3,
+      rotation: 45,
+      duration: 1.5,
+      ease: 'back.out(1.7)'
+    });
+
+    gsap.from('.info-item', {
+      scrollTrigger: { trigger: '#emplacement', start: 'top 80%' },
+      opacity: 0,
+      x: 200,
+      stagger: 0.2,
+      duration: 1,
+      ease: 'power4.out',
+      delay: 0.5
+    });
+
+    gsap.to('#map-frame', {
+      scrollTrigger: { trigger: '#emplacement', start: 'top 80%' },
+      strokeDasharray: '400',
+      strokeDashoffset: '400',
+      duration: 2,
+      ease: 'power4.out',
+      onStart: () => {
+        document.getElementById('map-frame').style.strokeDasharray = '400';
+        document.getElementById('map-frame').style.strokeDashoffset = '400';
+      },
+      strokeDashoffset: '0'
+    });
+
+    // Footer Animation
+    gsap.from('footer img', {
+      scrollTrigger: { trigger: 'footer', start: 'top 80%' },
+      opacity: 0,
+      scale: 0.3,
+      rotation: -720,
+      duration: 1.5,
+      ease: 'back.out(1.7)'
+    });
+
+    gsap.from('.text-pulse', {
+      scrollTrigger: { trigger: 'footer', start: 'top 80%' },
+      opacity: 0,
+      y: 100,
+      duration: 1.2,
+      ease: 'power4.out',
+      delay: 0.3
+    });
+
+    gsap.from('.footer-link', {
+      scrollTrigger: { trigger: 'footer', start: 'top 80%' },
+      opacity: 0,
+      y: 150,
+      stagger: 0.2,
+      duration: 1,
+      ease: 'power4.out',
+      delay: 0.5
+    });
+
+    gsap.from('.social-link', {
+      scrollTrigger: { trigger: 'footer', start: 'top 80%' },
+      opacity: 0,
+      scale: 0.5,
+      rotation: 45,
+      stagger: 0.2,
+      duration: 1,
+      ease: 'back.out(1.7)',
+      delay: 0.7
+    });
+
+    // Typewriter Effect
+    const typewriter = document.querySelector('.typewriter');
+    const text = typewriter.textContent;
+    typewriter.textContent = '';
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        typewriter.textContent += text.charAt(i);
+        i++;
+        setTimeout(type, 100);
+      }
+    }
+    setTimeout(type, 1000);
+
+    // Panier
+    let cart = [];
+    const cartItems = document.getElementById('cart-items');
+    const cartCount = document.getElementById('cart-count');
+    const cartTotal = document.getElementById('cart-total');
+
+    function updateCart() {
+      cartItems.innerHTML = '';
+      let total = 0;
+      let itemCount = 0;
+      cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        itemCount += item.quantity;
+        cartItems.innerHTML += `
+          <div class="flex items-center gap-4 border-b border-gray-200 py-4">
+            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
+            <div class="flex-1">
+              <p class="text-lg">${item.name} x${item.quantity}</p>
+              <p class="text-lg">${(item.price * item.quantity).toFixed(2)} €</p>
+            </div>
+            <button class="text-red-600 remove-item" data-index="${index}"><i class="fas fa-trash text-xl"></i></button>
+          </div>
+        `;
+      });
+      cartCount.textContent = itemCount;
+      cartTotal.textContent = total.toFixed(2) + ' €';
+      document.querySelectorAll('.remove-item').forEach(btn => {
+        btn.addEventListener('click', () => {
+          cart.splice(btn.dataset.index, 1);
+          updateCart();
+        });
+      });
+    }
+
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const name = btn.dataset.name;
+        const price = parseFloat(btn.dataset.price);
+        const image = btn.dataset.image;
+        const existingItem = cart.find(item => item.name === name);
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push({ name, price, image, quantity: 1 });
+        }
+        updateCart();
+        gsap.fromTo('#cart-modal', { opacity: 0, scale: 0.7, rotation: 15 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: 'back.out(1.7)' });
+        document.getElementById('cart-modal').classList.remove('hidden');
+        lottie.loadAnimation({
+          container: cartItems,
+          path: '/cart-particles.json',
+          renderer: 'svg',
+          loop: false,
+          autoplay: true
+        });
+      });
+    });
+
+    // Product Modal
+    document.querySelectorAll('.view-product').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('modal-title').textContent = btn.dataset.name;
+        document.getElementById('modal-description').textContent = btn.dataset.description;
+        document.getElementById('modal-price').textContent = btn.dataset.price + ' €';
+        document.getElementById('modal-add-to-cart').dataset.name = btn.dataset.name;
+        document.getElementById('modal-add-to-cart').dataset.price = btn.dataset.price;
+        document.getElementById('modal-add-to-cart').dataset.image = btn.dataset.image;
+        gsap.fromTo('#product-modal', { opacity: 0, scale: 0.7, rotation: -15 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: 'back.out(1.7)' });
+        document.getElementById('product-modal').classList.remove('hidden');
+      });
+    });
+
+    document.getElementById('modal-add-to-cart').addEventListener('click', (e) => {
+      const name = e.target.dataset.name;
+      const price = parseFloat(e.target.dataset.price);
+      const image = e.target.dataset.image;
+      if (name && price && image) {
+        const existingItem = cart.find(item => item.name === name);
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push({ name, price, image, quantity: 1 });
+        }
+        updateCart();
+        gsap.to('#product-modal', { opacity: 0, scale: 0.7, rotation: 15, duration: 0.8, onComplete: () => {
+          document.getElementById('product-modal').classList.add('hidden');
+          document.getElementById('cart-modal').classList.remove('hidden');
+        }});
+      }
+    });
+
+    document.getElementById('close-product-modal').addEventListener('click', () => {
+      gsap.to('#product-modal', { opacity: 0, scale: 0.7, rotation: 15, duration: 0.8, onComplete: () => {
+        document.getElementById('product-modal').classList.add('hidden');
+      }});
+    });
+
+    // Cart Modal
+    document.getElementById('cart-toggle').addEventListener('click', () => {
+      document.getElementById('cart-modal').classList.toggle('hidden');
+      if (!document.getElementById('cart-modal').classList.contains('hidden')) {
+        gsap.fromTo('#cart-modal', { opacity: 0, scale: 0.7, rotation: -15 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: 'back.out(1.7)' });
+      }
+    });
+
+    document.getElementById('close-cart').addEventListener('click', () => {
+      gsap.to('#cart-modal', { opacity: 0, scale: 0.7, rotation: 15, duration: 0.8, onComplete: () => {
+        document.getElementById('cart-modal').classList.add('hidden');
+      }});
+    });
+
+    // Filtres
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.replace('bg-sapphire', 'bg-gray-200'));
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.replace('text-ivory', 'text-anthracite'));
+        btn.classList.replace('bg-gray-200', 'bg-sapphire');
+        btn.classList.replace('text-anthracite', 'text-ivory');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.product').forEach(product => {
+          if (filter === 'all' || product.dataset.category === filter) {
+            product.style.display = 'block';
+            gsap.from(product, { opacity: 0, y: 150, rotation: 10, duration: 1, ease: 'power4.out' });
+          } else {
+            product.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Recherche
+    document.getElementById('search').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      document.querySelectorAll('.product').forEach(product => {
+        const name = product.querySelector('h3').textContent.toLowerCase();
+        if (name.includes(query)) {
+          product.style.display = 'block';
+          gsap.from(product, { opacity: 0, y: 150, rotation: -10, duration: 1, ease: 'power4.out' });
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    });
+
+    // Favoris
+    document.querySelectorAll('.add-to-favorites').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('text-red-600');
+        btn.classList.toggle('text-gray-700');
+        gsap.fromTo(btn, { scale: 1 }, { scale: 1.8, duration: 0.4, yoyo: true, repeat: 1 });
+      });
+    });
+
+    // Contact
+    document.getElementById('contact-submit').addEventListener('click', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      if (name && email && message) {
+        alert('Votre message a été envoyé ! Nous vous répondrons sous 24h.');
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('message').value = '';
+      } else {
+        alert('Veuillez remplir tous les champs.');
+      }
+    });
+
+    // Social Links Lottie Animation
+    document.querySelectorAll('.social-link').forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        const lottiePath = link.dataset.lottie;
+        const container = document.createElement('div');
+        container.className = 'lottie-social';
+        link.appendChild(container);
+        lottie.loadAnimation({
+          container: container,
+          path: lottiePath,
+          renderer: 'svg',
+          loop: false,
+          autoplay: true
+        });
+      });
+      link.addEventListener('mouseleave', () => {
+        const container = link.querySelector('.lottie-social');
+        if (container) container.remove();
+      });
+    });
+  </script>
+</body>
+</html>
