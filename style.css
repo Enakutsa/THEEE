@@ -74,6 +74,7 @@
   .nav-link {
     position: relative;
     font-family: 'Montserrat', sans-serif;
+    font-size: 1.125rem;
     transition: color 0.5s var(--transition-ease);
   }
   
@@ -116,21 +117,26 @@
   #hero {
     position: relative;
     overflow: hidden;
+    padding: 8rem 1rem;
   }
   
   #hero h1 {
     font-family: 'Montserrat', sans-serif;
+    font-size: 6rem;
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     animation: textSculpt 2s ease-out;
   }
   
   #hero p {
+    font-size: 1.875rem;
     animation: textSculpt 2.2s ease-out;
   }
   
   #hero a {
     position: relative;
     overflow: hidden;
+    padding: 0.75rem 2rem;
+    font-size: 1.25rem;
     animation: buttonSculpt 2.5s ease-out;
   }
   
@@ -166,21 +172,26 @@
   /* Boutique Section */
   #boutique {
     background: var(--ivory);
+    padding: 4rem 1rem;
   }
   
   #boutique h2 {
     font-family: 'Montserrat', sans-serif;
+    font-size: 4rem;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     animation: textSculpt 2s ease-out;
   }
   
   #boutique p {
+    font-size: 1rem;
     animation: textSculpt 2.2s ease-out;
   }
   
   .filter-btn {
     position: relative;
     overflow: hidden;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
     transition: transform 0.5s var(--transition-ease);
     animation: buttonPulse 3s infinite;
   }
@@ -208,11 +219,19 @@
   }
   
   #search {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
     transition: box-shadow 0.4s var(--transition-ease);
   }
   
   #search:focus {
     box-shadow: 0 0 20px rgba(27, 73, 101, 0.5);
+  }
+  
+  #products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
   }
   
   .product {
@@ -256,11 +275,16 @@
   
   .product h3 {
     font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem;
     transition: color 0.5s var(--transition-ease);
   }
   
   .product:hover h3 {
     color: var(--sapphire);
+  }
+  
+  .product p {
+    font-size: 1.125rem;
   }
   
   .add-to-cart {
@@ -314,6 +338,7 @@
   }
   
   .add-to-favorites, .view-product {
+    font-size: 1.25rem;
     transition: transform 0.5s var(--transition-ease);
   }
   
@@ -321,14 +346,28 @@
     transform: scale(1.4);
   }
   
-  @keyframes antiserumPulse {
+  @keyframes buttonPulse {
     0% { box-shadow: 0 0 0 0 rgba(27, 73, 101, 0.8); }
     70% { box-shadow: 0 0 0 25px rgba(27, 73, 101, 0); }
     100% { box-shadow: 0 0 0 0 rgba(27, 73, 101, 0); }
   }
   
   /* À propos Section */
+  #a-propos {
+    padding: 4rem 1rem;
+  }
+  
+  #a-propos h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4rem;
+  }
+  
+  #a-propos p {
+    font-size: 1rem;
+  }
+  
   #a-propos img {
+    height: 384px;
     transition: transform 0.9s var(--transition-ease);
   }
   
@@ -339,6 +378,8 @@
   #a-propos a {
     position: relative;
     overflow: hidden;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
   }
   
   #a-propos a::after {
@@ -360,11 +401,23 @@
   }
   
   /* Contact Section */
+  #contact {
+    padding: 4rem 1rem;
+  }
+  
   #contact h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4rem;
     animation: textSculpt 2s ease-out;
   }
   
+  #contact p {
+    font-size: 1rem;
+  }
+  
   #contact input, #contact textarea {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
     transition: box-shadow 0.5s var(--transition-ease);
   }
   
@@ -372,9 +425,15 @@
     box-shadow: 0 0 25px rgba(27, 73, 101, 0.5);
   }
   
+  #contact textarea {
+    height: 160px;
+  }
+  
   #contact button {
     position: relative;
     overflow: hidden;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
     animation: buttonPulse 2.5s infinite;
   }
   
@@ -400,14 +459,21 @@
   #emplacement {
     position: relative;
     overflow: hidden;
+    padding: 4rem 1rem;
   }
   
   #emplacement h2 {
     font-family: 'Montserrat', sans-serif;
+    font-size: 4rem;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   }
   
+  #emplacement p {
+    font-size: 1rem;
+  }
+  
   #emplacement iframe {
+    height: 400px;
     border-radius: 28px;
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
     transition: transform 0.5s var(--transition-ease);
@@ -425,6 +491,10 @@
     stroke: var(--gold);
   }
   
+  .info-frame {
+    margin-top: 1.5rem;
+  }
+  
   .hours-frame {
     margin-top: 1.5rem;
     padding: 1rem;
@@ -435,7 +505,12 @@
   }
   
   .hours-frame h3 {
+    font-size: 1.125rem;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .info-item {
+    font-size: 0.875rem;
   }
   
   @keyframes hoursPulse {
@@ -447,6 +522,7 @@
   /* Footer */
   footer {
     background: var(--anthracite);
+    padding: 2rem 1rem;
   }
   
   .footer-bar {
@@ -463,6 +539,7 @@
   .footer-link {
     position: relative;
     font-family: 'Montserrat', sans-serif;
+    font-size: 1.125rem;
     transition: color 0.5s var(--transition-ease);
   }
   
@@ -486,6 +563,7 @@
   }
   
   footer p {
+    font-size: 0.875rem;
     transition: color 0.5s var(--transition-ease);
   }
   
@@ -500,12 +578,26 @@
     transform-style: preserve-3d;
   }
   
+  #cart-modal .bg-ivory h2 {
+    font-size: 1.875rem;
+  }
+  
   #cart-modal .remove-item {
+    font-size: 1rem;
     transition: transform 0.5s var(--transition-ease);
   }
   
   #cart-modal .remove-item:hover {
     transform: scale(1.4);
+  }
+  
+  #cart-modal p {
+    font-size: 1rem;
+  }
+  
+  #cart-modal button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
   }
   
   /* Product Modal */
@@ -519,7 +611,25 @@
     transform-style: preserve-3d;
   }
   
+  #product-modal .bg-ivory h2 {
+    font-size: 1.875rem;
+  }
+  
+  #modal-3d-canvas {
+    height: 400px;
+  }
+  
+  #modal-description {
+    font-size: 0.875rem;
+  }
+  
+  #modal-price {
+    font-size: 1.125rem;
+  }
+  
   #modal-add-to-cart {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
     animation: buttonPulse 2.5s infinite;
   }
   
@@ -542,56 +652,377 @@
   }
   
   /* Responsive Design */
+  
+  /* Mobile (≤ 640px) */
   @media (max-width: 640px) {
     .max-w-7xl {
-      padding-left: 1rem;
-      padding-right: 1rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+  
+    /* Navigation */
+    nav {
+      padding: 0.5rem;
     }
   
     nav img {
-      height: 80px;
-      width: 80px;
+      height: 60px;
+      width: 60px;
     }
   
     .nav-link {
-      font-size: 0.875rem;
-    }
-  
-    #cart-toggle i {
-      font-size: 1.5rem;
-    }
-  
-    #cart-count {
-      height: 1.25rem;
-      width: 1.25rem;
       font-size: 0.75rem;
     }
   
+    #cart-toggle i {
+      font-size: 1.25rem;
+    }
+  
+    #cart-count {
+      height: 1rem;
+      width: 1rem;
+      font-size: 0.625rem;
+      top: -0.5rem;
+      right: -0.5rem;
+    }
+  
+    /* Hero */
     #hero {
-      padding-top: 8rem;
-      padding-bottom: 8rem;
+      padding: 4rem 0.5rem;
     }
   
     #hero h1 {
-      font-size: 3rem;
+      font-size: 2rem;
     }
   
     #hero p {
-      font-size: 1rem;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
     }
   
     #hero a {
-      padding: 0.5rem 1.5rem;
-      font-size: 0.875rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      margin-top: 1rem;
     }
   
+    /* Boutique */
     #boutique {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
+      padding: 2rem 0.5rem;
     }
   
     #boutique h2 {
-      font-size: 2.5rem;
+      font-size: 1.5rem;
+    }
+  
+    #boutique p {
+      font-size: 0.75rem;
+    }
+  
+    .filter-btn {
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+    }
+  
+    #search {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      max-width: 100%;
+    }
+  
+    #products {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  
+    .product {
+      height: 300px;
+    }
+  
+    .product img {
+      height: 100%;
+    }
+  
+    .product h3 {
+      font-size: 1rem;
+    }
+  
+    .product p {
+      font-size: 0.875rem;
+    }
+  
+    .add-to-cart {
+      font-size: 0.75rem;
+      padding: 0.5rem 1rem;
+    }
+  
+    .add-to-favorites, .view-product {
+      font-size: 1rem;
+    }
+  
+    /* À propos */
+    #a-propos {
+      padding: 2rem 0.5rem;
+    }
+  
+    #a-propos h2 {
+      font-size: 1.5rem;
+    }
+  
+    #a-propos p {
+      font-size: 0.75rem;
+    }
+  
+    #a-propos img {
+      height: 150px;
+    }
+  
+    #a-propos a {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+    }
+  
+    /* Contact */
+    #contact {
+      padding: 2rem 0.5rem;
+    }
+  
+    #contact h2 {
+      font-size: 1.5rem;
+    }
+  
+    #contact p {
+      font-size: 0.75rem;
+    }
+  
+    #contact input, #contact textarea {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+    }
+  
+    #contact textarea {
+      height: 100px;
+    }
+  
+    #contact button {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+    }
+  
+    /* Emplacement */
+    #emplacement {
+      padding: 2rem 0.5rem;
+    }
+  
+    #emplacement h2 {
+      font-size: 1.5rem;
+    }
+  
+    #emplacement p {
+      font-size: 0.75rem;
+    }
+  
+    #emplacement iframe {
+      height: 150px;
+    }
+  
+    .info-frame {
+      margin-top: 1rem;
+    }
+  
+    .hours-frame {
+      margin: 1rem 0.5rem 0;
+      padding: 0.5rem;
+    }
+  
+    .hours-frame h3 {
+      font-size: 1rem;
+    }
+  
+    .info-item {
+      font-size: 0.75rem;
+    }
+  
+    /* Footer */
+    footer {
+      padding: 1rem 0.5rem;
+    }
+  
+    .footer-bar {
+      padding: 0.5rem;
+      margin: 0 0.5rem;
+    }
+  
+    .footer-link {
+      font-size: 0.75rem;
+    }
+  
+    footer p {
+      font-size: 0.75rem;
+      margin-top: 1rem;
+    }
+  
+    /* Modals */
+    #cart-modal .bg-ivory {
+      padding: 1rem;
+      max-width: 90%;
+    }
+  
+    #cart-modal .bg-ivory h2 {
+      font-size: 1.25rem;
+    }
+  
+    #cart-modal .remove-item {
+      font-size: 0.875rem;
+    }
+  
+    #cart-modal p {
+      font-size: 0.75rem;
+    }
+  
+    #cart-modal button {
+      padding: 0.5rem;
+      font-size: 0.75rem;
+    }
+  
+    #product-modal .bg-ivory {
+      padding: 1rem;
+      max-width: 90%;
+    }
+  
+    #product-modal .bg-ivory h2 {
+      font-size: 1.25rem;
+    }
+  
+    #modal-3d-canvas {
+      height: 200px;
+    }
+  
+    #modal-description {
+      font-size: 0.75rem;
+    }
+  
+    #modal-price {
+      font-size: 0.875rem;
+    }
+  
+    #modal-add-to-cart {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+    }
+  }
+  
+  /* Très petits écrans (≤ 375px) */
+  @media (max-width: 375px) {
+    .max-w-7xl {
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+    }
+  
+    nav img {
+      height: 50px;
+      width: 50px;
+    }
+  
+    #hero h1 {
+      font-size: 1.5rem;
+    }
+  
+    #hero p {
+      font-size: 0.75rem;
+    }
+  
+    #hero a {
+      padding: 0.25rem 0.75rem;
+      font-size: 0.625rem;
+    }
+  
+    #boutique h2 {
+      font-size: 1.25rem;
+    }
+  
+    .product {
+      height: 250px;
+    }
+  
+    .add-to-cart {
+      font-size: 0.625rem;
+      padding: 0.25rem 0.75rem;
+    }
+  
+    #a-propos h2 {
+      font-size: 1.25rem;
+    }
+  
+    #a-propos img {
+      height: 120px;
+    }
+  
+    #contact h2 {
+      font-size: 1.25rem;
+    }
+  
+    #emplacement h2 {
+      font-size: 1.25rem;
+    }
+  
+    #emplacement iframe {
+      height: 120px;
+    }
+  }
+  
+  /* Tablette (641px à 1024px) */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .max-w-7xl {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  
+    /* Navigation */
+    nav img {
+      height: 100px;
+      width: 100px;
+    }
+  
+    .nav-link {
+      font-size: 1rem;
+    }
+  
+    #cart-toggle i {
+      font-size: 1.75rem;
+    }
+  
+    #cart-count {
+      height: 1.5rem;
+      width: 1.5rem;
+      font-size: 0.875rem;
+    }
+  
+    /* Hero */
+    #hero {
+      padding: 6rem 1.5rem;
+    }
+  
+    #hero h1 {
+      font-size: 4rem;
+    }
+  
+    #hero p {
+      font-size: 1.5rem;
+    }
+  
+    #hero a {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+    }
+  
+    /* Boutique */
+    #boutique {
+      padding: 3rem 1.5rem;
+    }
+  
+    #boutique h2 {
+      font-size: 3rem;
     }
   
     #boutique p {
@@ -608,34 +1039,27 @@
       font-size: 0.875rem;
     }
   
+    #products {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  
     .product {
       height: 400px;
     }
   
-    .product img {
-      height: 100%;
-    }
-  
-    .product h3 {
-      font-size: 1.25rem;
-    }
-  
-    .product p {
-      font-size: 1rem;
-    }
-  
     .add-to-cart {
-      font-size: 1rem;
-      padding: 0.75rem 2rem;
+      font-size: 1.5rem;
+      padding: 1rem 2.5rem;
     }
   
+    /* À propos */
     #a-propos {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
+      padding: 3rem 1.5rem;
     }
   
     #a-propos h2 {
-      font-size: 2.5rem;
+      font-size: 3rem;
     }
   
     #a-propos p {
@@ -643,21 +1067,21 @@
     }
   
     #a-propos img {
-      height: 200px;
+      height: 300px;
     }
   
     #a-propos a {
-      padding: 0.5rem 1.5rem;
+      padding: 0.5rem 1rem;
       font-size: 0.875rem;
     }
   
+    /* Contact */
     #contact {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
+      padding: 3rem 1.5rem;
     }
   
     #contact h2 {
-      font-size: 2.5rem;
+      font-size: 3rem;
     }
   
     #contact p {
@@ -674,17 +1098,17 @@
     }
   
     #contact button {
-      padding: 0.5rem;
+      padding: 0.5rem 1rem;
       font-size: 0.875rem;
     }
   
+    /* Emplacement */
     #emplacement {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
+      padding: 3rem 1.5rem;
     }
   
     #emplacement h2 {
-      font-size: 2.5rem;
+      font-size: 3rem;
     }
   
     #emplacement p {
@@ -692,21 +1116,25 @@
     }
   
     #emplacement iframe {
-      height: 200px;
+      height: 300px;
     }
   
     .hours-frame {
-      margin: 0 1rem;
+      margin: 1rem 0;
       padding: 0.75rem;
     }
   
     .hours-frame h3 {
-      font-size: 1.25rem;
+      font-size: 1rem;
+    }
+  
+    /* Footer */
+    footer {
+      padding: 1.5rem 1.5rem;
     }
   
     .footer-bar {
-      padding: 1rem;
-      margin: 0 1rem;
+      padding: 0.75rem;
     }
   
     .footer-link {
@@ -715,5 +1143,26 @@
   
     footer p {
       font-size: 0.875rem;
+    }
+  
+    /* Modals */
+    #cart-modal .bg-ivory {
+      max-width: 80%;
+    }
+  
+    #cart-modal .bg-ivory h2 {
+      font-size: 1.5rem;
+    }
+  
+    #product-modal .bg-ivory {
+      max-width: 80%;
+    }
+  
+    #product-modal .bg-ivory h2 {
+      font-size: 1.5rem;
+    }
+  
+    #modal-3d-canvas {
+      height: 300px;
     }
   }
